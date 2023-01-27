@@ -22,3 +22,13 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    controller.user_controller:
+        class: App\Controller\UserController
+        arguments:
+            - '@event_dispatcher'
+
+    listener.user_registered:
+        class: App\Listeners\UserListener
+        tags:
+            - { name: kernel.event_subscriber }

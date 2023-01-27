@@ -13,17 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     #[Route('/save-user', name: 'save_user')]
-    public function saveUser(Request $request, ManagerRegistry $doctrine): Response
+    public function saveUser(Request $request, UserRepository $userRepository): Response
     {
-        dump($request->request);
-        $em = $doctrine->getManager();
-
         $user = new User();
         $user->setEmail($request->request->get('firstName'));
         $user->setPassword($request->get('password'));
 
-        $em->persist($user);
-        $em->flush();
+        $userRepository->save($user);
 
         return $this->render('main/registrationCompleted.html.twig');
     }

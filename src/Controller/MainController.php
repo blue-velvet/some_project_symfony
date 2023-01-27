@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Users;
 use App\Events\User;
 use App\Events\UserListener;
 use App\Events\UserRegisteredEvent;

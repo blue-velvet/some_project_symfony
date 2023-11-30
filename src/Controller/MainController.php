@@ -25,4 +25,10 @@ class MainController extends AbstractController
     {
         return $this->render('main/register.html.twig');
     }
+
+    #[Route('/cabinet', name: 'cabinet')]
+    public function signInUser(): Response
+    {
+        return $this->render('main/cabinet.html.twig');
+    }
 }

@@ -19,15 +19,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class UserController extends AbstractController
 {
     private EventDispatcherInterface $dispatcher;
-    private UserRepository $userRepository;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
-        UserRepository $userRepository
     )
     {
         $this->dispatcher = $dispatcher;
-        $this->userRepository = $userRepository;
     }
 
     /**

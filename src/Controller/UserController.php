@@ -37,20 +37,10 @@ class UserController extends AbstractController
     {
         $user = new User();
 
-        $email = $request->get('email');
-        if ($email === null) {
-            throw new \RuntimeException('empty email');
-        }
-        if ($this->userRepository->findOneByLogin($email) !== null) {
-            throw new \RuntimeException(sprintf('User %s already exists', $email));
-        }
-
+        $login = $request->get('login');
         $password = $request->get('password');
-        if ($password === null) {
-            throw new \RuntimeException('empty password');
-        }
 
-        $user->setEmail($email);
+        $user->setLogin($login);
         $user->setPassword($password);
         $userRepository->save($user);
 

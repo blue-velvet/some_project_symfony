@@ -15,7 +15,7 @@ class User
 
     #todo unique doesn't work
     #[ORM\Column(length: 255, unique: true)]
-    private string $email;
+    private string $login;
 
     #[ORM\Column(length: 255)]
     private string $password;
@@ -25,14 +25,14 @@ class User
         return $this->id;
     }
 
-    public function getEmail(): string
+    public function getLogin(): string
     {
-        return $this->email;
+        return $this->login;
     }
 
-    public function setEmail(string $email): self
+    public function setLogin(string $login): self
     {
-        $this->email = $email;
+        $this->login = $login;
 
         return $this;
     }

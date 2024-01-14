@@ -24,11 +24,13 @@
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="_password">
 
-                    {# If you want to control the URL the user is redirected to on success #}
-                    <input type="hidden" name="cabinet" value="/account">
-
+                    <input type="hidden" name="_target_path" value="/cabinet">
                     <button type="submit">login</button>
                 </form>
+
+                <a href="/register">
+                    <button name="_target_path" value="/register">Register</button>
+                </a>
             </div>
         </div>
     </div>

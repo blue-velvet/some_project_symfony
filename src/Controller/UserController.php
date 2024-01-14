@@ -9,22 +9,21 @@ use App\Events\UserRegisteredEvent;
 use App\Repository\UserRepository;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
-    private EventDispatcherInterface $dispatcher;
-
     public function __construct(
-        EventDispatcherInterface $dispatcher,
-    )
-    {
-        $this->dispatcher = $dispatcher;
+        private readonly EventDispatcherInterface $dispatcher,
+    ) {
     }
 
     /**
@@ -50,26 +49,6 @@ class UserController extends AbstractController
         $event = new UserRegisteredEvent($user);
         $this->dispatcher->dispatch($event);
 
-        return $this->render('main/registrationCompleted.html.twig');
-    }
-
-    #[Route('/login', name: 'login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
-        $error = $authenticationUtils->getLastAuthenticationError();
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        if ($lastUsername !== '') {
-            return $this->render('main/cabinet.html.twig', [
-                    'user' => $this->getUser()
-                ]
-            );
-        }
-
-        return $this->render('main/login.html.twig', [
-                'last_username' => $lastUsername,
-                'error'         => $error,
-            ]
-        );
+        return $this->redirectToRoute('cabinet');
     }
 }

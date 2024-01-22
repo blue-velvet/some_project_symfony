@@ -11,6 +11,11 @@
             <div class="panel-heading text-center">
                 <h1>Registration Form</h1>
             </div>
+            {% for msg in app.session.flashBag.get('error') %}
+                <div class="alert alert-error">
+                    {{ msg }}
+                </div>
+            {% endfor %}
             <div class="panel-body">
                 <form action="{{ path('save_user') }}" method="post">
 
